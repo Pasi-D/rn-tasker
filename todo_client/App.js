@@ -3,6 +3,8 @@ import { StyleSheet, Text, View } from 'react-native';
 
 import axios from "axios";
 
+import appStyles from './src/styles/app';
+
 var ip = require('./dev/configs/keys').machineIP
 
 export default class App extends React.Component {
@@ -22,7 +24,7 @@ export default class App extends React.Component {
   render() {
     console.log(this.state.tasks);    
     return (            
-      <View style={styles.container}>
+      <View style={appStyles.container}>
         <Text>Open up App.js to start working on your app!</Text>
         <Text>Changes you make will automatically reload.</Text>
         <Text>Shake your phone to open the developer menu.</Text>
@@ -31,12 +33,3 @@ export default class App extends React.Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
