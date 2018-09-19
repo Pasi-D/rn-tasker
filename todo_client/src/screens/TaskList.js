@@ -1,5 +1,5 @@
 import React,{ Component } from "react";
-import { ActivityIndicator, View, FlatList, Text } from "react-native";
+import { Alert, ActivityIndicator, View, FlatList, Text } from "react-native";
 import { List, ListItem } from 'react-native-elements'
 
 import { connect } from "react-redux";
@@ -10,10 +10,15 @@ import { PropTypes } from "prop-types";
 
 class TaskList extends Component{
     constructor(props) {
-        super(props);    
+        super(props);   
+        this._listItemPress = this._listItemPress.bind(this) 
     }
     
     _keyExtractor = (item, index) => item._id;
+
+    _listItemPress(id){
+        Alert.alert('Pressed on ' + id);
+    }
 
     renderTasks(){
         const resTasks = this.props.tasks;
@@ -43,16 +48,31 @@ class TaskList extends Component{
             )
         }else{
             return(
-                <List>
-                    {
-                        tasks.map((item) => (
-                            <ListItem
-                                key={item._id}
-                                title={item.title}
-                                />
-                        ))
-                    }
-                </List>
+                <View style={{
+                        flex: 1,
+                        flexDirection: 'column',
+                        justifyContent: 'center',
+                        alignItems: 'center' 
+                }}>
+                    <View>
+                        <Text>Tasks List</Text>
+                    </View>
+                    <View style={{
+                                    marginTop: 40
+                    }}>
+                        <List style={{marginTop: 20}}>
+                        {
+                            tasks.map((item) => (
+                                <ListItem
+                                    onPress={() => this._listItemPress(`${item._id}`)}
+                                    key={item._id}
+                                    title={item.title}
+                                    />
+                            ))
+                        }
+                        </List>
+                    </View>
+                </View>
             )
         }
     }
