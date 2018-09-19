@@ -1,6 +1,6 @@
 import React,{ Component } from "react";
 import { Alert, ActivityIndicator, View, FlatList, Text } from "react-native";
-import { List, ListItem } from 'react-native-elements'
+import { List, ListItem, Header } from 'react-native-elements'
 
 import { connect } from "react-redux";
 
@@ -8,7 +8,7 @@ import { getTasks } from "../actions/taskActions";
 
 import { PropTypes } from "prop-types";
 
-class TaskList extends Component{
+class TaskListScreen extends Component{
     constructor(props) {
         super(props);   
         this._listItemPress = this._listItemPress.bind(this) 
@@ -16,8 +16,8 @@ class TaskList extends Component{
     
     _keyExtractor = (item, index) => item._id;
 
-    _listItemPress(id){
-        Alert.alert('Pressed on ' + id);
+    _listItemPress(item){                
+        Alert.alert('Pressed on ' + item.item._id);
     }
 
     renderTasks(){
@@ -48,30 +48,21 @@ class TaskList extends Component{
             )
         }else{
             return(
-                <View style={{
-                        flex: 1,
-                        flexDirection: 'column',
-                        justifyContent: 'center',
-                        alignItems: 'center' 
-                }}>
-                    <View>
-                        <Text>Tasks List</Text>
-                    </View>
-                    <View style={{
-                                    marginTop: 40
-                    }}>
-                        <List style={{marginTop: 20}}>
+                <View>
+                    <Header                        
+                        centerComponent={{ text: 'Tasks Lists', style: { color: '#fff' } }}                        
+                    />
+                    <List style={{marginTop: 20}}>
                         {
                             tasks.map((item) => (
                                 <ListItem
-                                    onPress={() => this._listItemPress(`${item._id}`)}
+                                    onPress={() => this._listItemPress({item})}
                                     key={item._id}
                                     title={item.title}
                                     />
                             ))
                         }
-                        </List>
-                    </View>
+                    </List>
                 </View>
             )
         }
@@ -88,7 +79,7 @@ class TaskList extends Component{
     }
 }
 
-TaskList.propTypes = {
+TaskListScreen.propTypes = {
     getTasks: PropTypes.func.isRequired,
     tasks: PropTypes.object.isRequired
 }
@@ -99,5 +90,5 @@ const mapStateToProps = (state) => ({
     loading: state.tasks.loading
 })
 
-export default connect(mapStateToProps, { getTasks })(TaskList);
+export default connect(mapStateToProps, { getTasks })(TaskListScreen);
 
