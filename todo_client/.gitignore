@@ -12,6 +12,12 @@
 .env.test.local
 .env.production.local
 
+#ios
+/ios
+
+#android
+/android
+
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*

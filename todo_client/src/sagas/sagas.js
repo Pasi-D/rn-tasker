@@ -1,6 +1,7 @@
 import { 
     GET_TASKS,
     GET_TASKS_API,
+    DELETE_TASK,
     API_FAIL
  } from '../actions/types';
 
@@ -16,6 +17,13 @@ import {
     console.log('listening to dispatch calls');
     
     yield takeLatest(GET_TASKS_API, workerFetchTasks)
+ }
+
+ // deleteWatcher Saga listens 
+ function* deleteWatcherSaga(){
+    console.log('Listening to dispatch calls of delete type');
+
+    yield takeLatest(DELETE_TASK, workerDeleteTask(id))
  }
 
  /* saga debugging */
@@ -43,12 +51,20 @@ export function* workerFetchTasks(){
     }
 }
 
+// Worker saga to make api call to delete when dispatch call of delete is listened
+// Exporting for testing
+export function* workerDeleteTask(id){
+    console.log(id + ' was passed to delete');
+    
+}
+
 
 export default function* rootSaga(){
     yield all(
         [
             TestSaga(),
-            watcherSaga()
+            watcherSaga(), 
+            //deleteWatcherSaga()       
         ]
     )   
 }

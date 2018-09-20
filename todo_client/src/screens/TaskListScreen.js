@@ -16,8 +16,10 @@ class TaskListScreen extends Component{
     
     _keyExtractor = (item, index) => item._id;
 
-    _listItemPress(item){                
-        Alert.alert('Pressed on ' + item.item._id);
+    _listItemPress = (item) =>{                
+        this.props.navigation.push('Show', {
+            task: {...item}
+        })   
     }
 
     renderTasks(){
@@ -56,7 +58,7 @@ class TaskListScreen extends Component{
                         {
                             tasks.map((item) => (
                                 <ListItem
-                                    onPress={() => this._listItemPress({item})}
+                                    onPress={() => this._listItemPress(item)}
                                     key={item._id}
                                     title={item.title}
                                     />
