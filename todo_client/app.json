@@ -1,7 +1,4 @@
-{ 
-  "name": "todoApp",
-  "displayName": "TodoApp",
-  "expo": {
-    "sdkVersion": "27.0.0"
-  }
+{
+  "name": "todo_client",
+  "displayName": "todo_client"
 }

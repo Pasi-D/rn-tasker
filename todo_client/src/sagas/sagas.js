@@ -5,37 +5,32 @@ import {
     API_FAIL
  } from '../actions/types';
 
- import axios from "axios";
+ import axios from 'axios';
 
- import { call, put, takeLatest, all } from "redux-saga/effects";
+ import { call, put, takeLatest, all } from 'redux-saga/effects';
 
- var ip = require('../../dev/configs/keys').machineIP
+ var ip = require('../../dev/configs/keys').machineIP;
 
- // watcher saga: watches for actions dispatched to the store, starts worker saga
- function* watcherSaga(){
+// watcher saga: watches for actions dispatched to the store, starts worker saga
+function* watcherSaga(){
     //takeLatest automatically cancels any previous saga task started previous if it's still running.    
     console.log('listening to dispatch calls');
     
     yield takeLatest(GET_TASKS_API, workerFetchTasks)
- }
+}
 
- // deleteWatcher Saga listens 
- function* deleteWatcherSaga(){
+// deleteWatcher Saga listens 
+function* deleteWatcherSaga(){
     console.log('Listening to dispatch calls of delete type');
 
-    yield takeLatest(DELETE_TASK, workerDeleteTask(id))
- }
-
- /* saga debugging */
-function* TestSaga(){
-    console.log('Redux-Saga is working !');    
+    yield takeLatest(DELETE_TASK, workerDeleteTask)
 }
 
 // Fetch all tasks
 //export for testing
 export const fetchTasks = () => axios.get(ip + ':3000/api/task')
                                     .then(response => response)
-
+                                    
 // Worker Saga for making api call when dispatched call was listened by watcherSaga
 // exporting for testing
 export function* workerFetchTasks(){
@@ -51,20 +46,37 @@ export function* workerFetchTasks(){
     }
 }
 
-// Worker saga to make api call to delete when dispatch call of delete is listened
-// Exporting for testing
-export function* workerDeleteTask(id){
-    console.log(id + ' was passed to delete');
+export const fetchDelTask = (id) => axios.delete(ip + ':3000/api/task/' + id)
+                                        .then(response => response)
+
+export function* workerDeleteTask(action){
+    //action.id
+    try {
+        console.log('deleting ' +  action.id);
+        
+        const response = yield call(fetchDelTask(action.id));
+
+        if (response) {
+            this.props.navigation.navigate('Home')
+        }
+        
+    } catch (err) {
+        yield put({type: API_FAIL, err})
+    }
     
 }
 
+ /* saga debugging */
+function* TestSaga(){
+    console.log('Redux-Saga is working !');    
+}
 
 export default function* rootSaga(){
     yield all(
         [
             TestSaga(),
             watcherSaga(), 
-            //deleteWatcherSaga()       
+            deleteWatcherSaga()       
         ]
     )   
 }

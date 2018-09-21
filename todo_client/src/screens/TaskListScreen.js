@@ -1,6 +1,7 @@
 import React,{ Component } from "react";
-import { Alert, ActivityIndicator, View, FlatList, Text } from "react-native";
-import { List, ListItem, Header } from 'react-native-elements'
+import { ActivityIndicator, View, Text } from "react-native";
+
+import { List, ListItem, Header } from 'react-native-elements';
 
 import { connect } from "react-redux";
 
@@ -9,11 +10,12 @@ import { getTasks } from "../actions/taskActions";
 import { PropTypes } from "prop-types";
 
 class TaskListScreen extends Component{
+
     constructor(props) {
         super(props);   
         this._listItemPress = this._listItemPress.bind(this) 
     }
-    
+
     _keyExtractor = (item, index) => item._id;
 
     _listItemPress = (item) =>{                
@@ -26,9 +28,9 @@ class TaskListScreen extends Component{
         const resTasks = this.props.tasks;
         const tasks = resTasks.tasks;
         const loading = this.props.loading;
-        
+
         console.log('tasks : ' + JSON.stringify(tasks));
-        ``
+
         //convert the restasks in JSON.stringify to an array
         if(this.props.errors){
             return(
@@ -74,7 +76,7 @@ class TaskListScreen extends Component{
         this.props.getTasks();        
     }
 
-    render(){
+    render(){                
         return(
             this.renderTasks()
         )
@@ -93,4 +95,3 @@ const mapStateToProps = (state) => ({
 })
 
 export default connect(mapStateToProps, { getTasks })(TaskListScreen);
-

@@ -1,5 +1,6 @@
 import { createStore, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
+
 //rootReducer
 import rootReducers from './reducers';
 
@@ -13,7 +14,6 @@ import { createLogger } from "redux-logger";
 const logger = createLogger({
     
 })
-
 
 //create saga middleare
 const sagaMiddleware = createSagaMiddleware();

@@ -16,6 +16,8 @@ export const getTasks = () => dispatchEvent => {
 }
 
 export const deleteTask = (id) => dispatchEvent => {
+    console.log(id + 'delete task parsed to in actions');
+    
     dispatchEvent(
         {
             type: DELETE_TASK,

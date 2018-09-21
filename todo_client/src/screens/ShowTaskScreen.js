@@ -9,7 +9,7 @@ import { connect } from "react-redux";
 
 import Modal from "react-native-modal";
 
-import deleteTask from '../actions/taskActions';
+import { deleteTask } from '../actions/taskActions';
 
 class ShowTaskScreen extends Component{
     state = {
@@ -17,7 +17,7 @@ class ShowTaskScreen extends Component{
     };
 
     constructor(props) {
-        super(props);
+        super(props);        
     }
 
     _editButtonPress = (task) => {
@@ -31,9 +31,10 @@ class ShowTaskScreen extends Component{
             isDeleteModalVisible: !this.state.isDeleteModalVisible 
         });
     }
-
-    _confDeleteButton = (id) => {
-        this.props.deleteTask(id)
+    
+    _confDeleteButton = (id) => {                
+        this.props.deleteTask(id);
+        
         this._toggleDeleteModal();
     }
 
@@ -41,11 +42,10 @@ class ShowTaskScreen extends Component{
         this._toggleDeleteModal();   
     }
 
-
     render(){
         const { navigation } = this.props;
         const task = navigation.getParam('task', {"status":true,"_id":"5b963c959cf78a22a43c0ff2","title":"Task not found","description":"Something went wrong","end_date":"2018-09-21T00:00:00.000Z","start_date":"2018-09-13T00:00:00.000Z","__v":0});
-                
+
         return(
             <View>
                 <Header 
@@ -64,7 +64,7 @@ class ShowTaskScreen extends Component{
                     <Text>Start Date: {JSON.stringify(task.start_date)}</Text>
                     <Text>End Date: {JSON.stringify(task.end_date)}</Text>
                 </View>
-                
+
                 <View style={{marginTop: 70}}>
                     <Button 
                         title='Edit'
@@ -83,7 +83,7 @@ class ShowTaskScreen extends Component{
                     <Modal 
                         isVisible={this.state.isDeleteModalVisible}
                         backdropColor="white"
-                        backdropOpacity='0.95'
+                        backdropOpacity={0.95}
                     >
                         <View style={{ 
                             flex: 1,
@@ -105,17 +105,14 @@ class ShowTaskScreen extends Component{
                             />
                         </View>
                     </Modal>
-                </View>                
+                </View>
             </View>
         )
     }
-
-    
 }
 
 ShowTaskScreen.propTypes = {
-    deleteTask: PropTypes.func.isRequired,
-    task: PropTypes.object.isRequired
+    //deleteTask: PropTypes.func.isRequired,    
 }
 
 const mapStateToProps = (state) => ({
