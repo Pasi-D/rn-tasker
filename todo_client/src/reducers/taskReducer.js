@@ -1,14 +1,16 @@
 import {    
     GET_TASKS,
     GET_TASK,
-    API_FAIL
+    API_FAIL,
+    DELETED
 } from '../actions/types'
 
 const initialState = {
     tasks: null, //for all tasks in calling 
     task: null,   //for an individual task
     errors: null, //
-    loading: true
+    loading: true,
+    deleted: false
 }
 
 export default function(state=initialState, action){
@@ -33,6 +35,13 @@ export default function(state=initialState, action){
                 ...state,
                 loading: false,
                 errors: action.err
+            }
+        // On Deleting a task
+        case DELETED: 
+            return {
+                ...state,
+                loading: false,
+                deleted: action.delStatus
             }
         default:
             return state;

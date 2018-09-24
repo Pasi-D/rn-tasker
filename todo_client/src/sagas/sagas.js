@@ -2,7 +2,8 @@ import {
     GET_TASKS,
     GET_TASKS_API,
     DELETE_TASK,
-    API_FAIL
+    API_FAIL,
+    DELETED
  } from '../actions/types';
 
  import axios from 'axios';
@@ -49,17 +50,17 @@ export function* workerFetchTasks(){
 export const fetchDelTask = (id) => axios.delete(ip + ':3000/api/task/' + id)
                                         .then(response => response)
 
-export function* workerDeleteTask(action){
-    //action.id
-    try {
-        console.log('deleting ' +  action.id);
-        
-        const response = yield call(fetchDelTask(action.id));
+export function* workerDeleteTask(action){    
+    try {                
+        const response = yield call(fetchDelTask, action.id);
 
         if (response) {
-            this.props.navigation.navigate('Home')
+            var delStatus = true
+        }else{
+            var delStatus = false
         }
-        
+
+        yield put({ type: DELETED, delStatus})        
     } catch (err) {
         yield put({type: API_FAIL, err})
     }

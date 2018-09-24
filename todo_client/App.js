@@ -17,6 +17,8 @@ import store from './src/store';
 
 import TaskListScreen from './src/screens/TaskListScreen';
 import ShowTaskScreen from './src/screens/ShowTaskScreen';
+import EditTaskScreen from './src/screens/EditTaskScreen';
+import AddTaskScreen from './src/screens/AddTaskScreen';
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -28,7 +30,9 @@ const instructions = Platform.select({
 const RootStack = createStackNavigator(
   {
     Home: TaskListScreen,
-    Show: ShowTaskScreen
+    Show: ShowTaskScreen,
+    Edit: EditTaskScreen,
+    Add: AddTaskScreen
   },
   {
     initialRouteName: 'Home',

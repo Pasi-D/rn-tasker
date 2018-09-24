@@ -1,5 +1,5 @@
 import React,{ Component } from "react";
-import { ActivityIndicator, View, Text } from "react-native";
+import { ActivityIndicator, View, Text, ToastAndroid } from "react-native";
 
 import { List, ListItem, Header } from 'react-native-elements';
 
@@ -18,10 +18,16 @@ class TaskListScreen extends Component{
 
     _keyExtractor = (item, index) => item._id;
 
-    _listItemPress = (item) =>{                
+    _listItemPress = (item) =>{
+        //navigate to task show screen                
         this.props.navigation.push('Show', {
             task: {...item}
         })   
+    }
+
+    _addTaskIconPress = () => {
+        //navigate to addTask screen
+        this.props.navigation.push('Add')
     }
 
     renderTasks(){
@@ -54,7 +60,11 @@ class TaskListScreen extends Component{
             return(
                 <View>
                     <Header                        
-                        centerComponent={{ text: 'Tasks Lists', style: { color: '#fff' } }}                        
+                        centerComponent={{ text: 'Tasks Lists', style: { color: '#fff' } }}
+                        rightComponent={{ icon: 'add', 
+                                          color: '#fff',
+                                          onPress: () => this._addTaskIconPress()  
+                                        }}                        
                     />
                     <List style={{marginTop: 20}}>
                         {
@@ -73,7 +83,12 @@ class TaskListScreen extends Component{
     }
 
     componentDidMount(){
-        this.props.getTasks();        
+        this.props.getTasks();                        
+        if (this.props.deleted) {
+            console.log('This is supposed to trigger on deletion');
+            
+            ToastAndroid.show('Task Was Deleted', ToastAndroid.LONG);
+        }
     }
 
     render(){                
@@ -91,7 +106,8 @@ TaskListScreen.propTypes = {
 const mapStateToProps = (state) => ({
     tasks: state.tasks,
     errors: state.tasks.errors,
-    loading: state.tasks.loading
+    loading: state.tasks.loading,
+    deleted: state.tasks.deleted
 })
 
 export default connect(mapStateToProps, { getTasks })(TaskListScreen);
