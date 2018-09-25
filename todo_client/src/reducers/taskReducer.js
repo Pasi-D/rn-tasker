@@ -2,7 +2,8 @@ import {
     GET_TASKS,
     GET_TASK,
     API_FAIL,
-    DELETED
+    DELETED,
+    ADDED
 } from '../actions/types'
 
 const initialState = {
@@ -10,7 +11,8 @@ const initialState = {
     task: null,   //for an individual task
     errors: null, //
     loading: true,
-    deleted: false
+    deleted: false,
+    added: false
 }
 
 export default function(state=initialState, action){
@@ -42,6 +44,13 @@ export default function(state=initialState, action){
                 ...state,
                 loading: false,
                 deleted: action.delStatus
+            }
+        // On Adding a task
+        case ADDED:
+            return {
+                ...state,
+                loading: false,
+                added: action.addStatus
             }
         default:
             return state;

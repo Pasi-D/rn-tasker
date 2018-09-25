@@ -80,14 +80,21 @@ class TaskListScreen extends Component{
                 </View>
             )
         }
+    }    
+    componentWillMount(){
+        this.props.getTasks();                       
     }
 
     componentDidMount(){
-        this.props.getTasks();                        
+        this.props.getTasks();                       
         if (this.props.deleted) {
             console.log('This is supposed to trigger on deletion');
             
             ToastAndroid.show('Task Was Deleted', ToastAndroid.LONG);
+        }else if(this.props.added){
+            console.log('This is supposed to trigger on addition');
+
+            ToastAndroid('Task was added', ToastAndroid.LONG);
         }
     }
 
@@ -107,7 +114,8 @@ const mapStateToProps = (state) => ({
     tasks: state.tasks,
     errors: state.tasks.errors,
     loading: state.tasks.loading,
-    deleted: state.tasks.deleted
+    deleted: state.tasks.deleted,
+    added: state.tasks.added
 })
 
 export default connect(mapStateToProps, { getTasks })(TaskListScreen);

@@ -63,6 +63,21 @@ Browse into todo_client
 #### [tcomb-form-native](https://github.com/gcanti/tcomb-form-native)
 
 
+### p.s :- if the icons are not working or the build fails on `react-native run-android`
+
+`cd todo_client`
+
+`rm -rf android`
+
+`react-native eject`
+
+Edit android/app/build.gradle ( NOT android/build.gradle ) and add the following:
+
+`apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"`
+
+if it doesnt work refer [react-native-vector icons](https://github.com/oblador/react-native-vector-icons/#user-content-option-manually-1) installation
+
+
 
 
 

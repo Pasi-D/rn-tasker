@@ -4,7 +4,9 @@ import {
     GET_TASK,    
     GET_TASKS_API,
     DELETE_TASK,
-    DELETED
+    DELETED,
+    ADD_TASK,
+    ADDED
 } from './types'
 
 //GET_TASKS
@@ -16,6 +18,7 @@ export const getTasks = () => dispatchEvent => {
     )
 }
 
+// To delete a task 
 export const deleteTask = (id) => dispatchEvent => {        
     dispatchEvent(
         {
@@ -31,6 +34,26 @@ export const falsifyDelStatus = () => dispatchEvent => {
         {
             type: DELETED,
             delStatus: false
+        }
+    )
+}
+
+// To add a task
+export const addTask = (task) => dispatchEvent => {
+    dispatchEvent(
+        {
+            type: ADD_TASK,
+            task
+        }
+    )
+}
+
+// To make the added on redux store to make false
+export const falsifyAddStatus = () => dispatchEvent => {
+    dispatchEvent(
+        {
+            type: ADDED,
+            addStatus: false
         }
     )
 }

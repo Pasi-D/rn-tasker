@@ -3,7 +3,9 @@ import {
     GET_TASKS_API,
     DELETE_TASK,
     API_FAIL,
-    DELETED
+    DELETED,
+    ADD_TASK,
+    ADDED
  } from '../actions/types';
 
  import axios from 'axios';
@@ -13,18 +15,24 @@ import {
  var ip = require('../../dev/configs/keys').machineIP;
 
 // watcher saga: watches for actions dispatched to the store, starts worker saga
-function* watcherSaga(){
+function* getWatcherSaga(){
     //takeLatest automatically cancels any previous saga task started previous if it's still running.    
-    console.log('listening to dispatch calls');
+    console.log('Saga listening to dispatch calls');
     
     yield takeLatest(GET_TASKS_API, workerFetchTasks)
 }
 
 // deleteWatcher Saga listens 
 function* deleteWatcherSaga(){
-    console.log('Listening to dispatch calls of delete type');
+    console.log('Saga listening to dispatch calls of delete type');
 
     yield takeLatest(DELETE_TASK, workerDeleteTask)
+}
+
+function* addWatcherSaga(){
+    console.log('Saga listening to dispatch calls of add type');
+    
+    yield takeLatest(ADD_TASK, workerAddTask) 
 }
 
 // Fetch all tasks
@@ -32,7 +40,7 @@ function* deleteWatcherSaga(){
 export const fetchTasks = () => axios.get(ip + ':3000/api/task')
                                     .then(response => response)
                                     
-// Worker Saga for making api call when dispatched call was listened by watcherSaga
+// Worker Saga for making api call when dispatched call was listened by getWatcherSaga
 // exporting for testing
 export function* workerFetchTasks(){
     try {
@@ -50,6 +58,8 @@ export function* workerFetchTasks(){
 export const fetchDelTask = (id) => axios.delete(ip + ':3000/api/task/' + id)
                                         .then(response => response)
 
+// Worker Saga for making api call when dispatching call was listened by deleteWatcherSaga
+// exporting for testing                                        
 export function* workerDeleteTask(action){    
     try {                
         const response = yield call(fetchDelTask, action.id);
@@ -67,6 +77,30 @@ export function* workerDeleteTask(action){
     
 }
 
+export const fetchAddTask = (task) => axios.post(ip + ':3000/api/task/', task)
+                                            .then(response => response)
+
+// Worker Saga for making api call when dispatching call was listened by addWatcherSaga
+// exporting for testing
+export function* workerAddTask(action){
+    try {
+        const response = yield call(fetchAddTask, action.task);
+
+        if (response) {
+            console.log('response ' + response);
+            
+            var addStatus = true
+        }else{
+            var addStatus = false
+        }
+
+        yield put({ type: ADDED, addStatus })
+    } catch (err) {
+        yield put({ type: API_FAIL, err })
+    }
+}
+
+
  /* saga debugging */
 function* TestSaga(){
     console.log('Redux-Saga is working !');    
@@ -76,8 +110,9 @@ export default function* rootSaga(){
     yield all(
         [
             TestSaga(),
-            watcherSaga(), 
-            deleteWatcherSaga()       
+            getWatcherSaga(), 
+            deleteWatcherSaga(),
+            addWatcherSaga()       
         ]
     )   
 }

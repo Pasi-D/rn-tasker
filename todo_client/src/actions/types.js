@@ -5,3 +5,4 @@ export const GET_TASKS_API = 'GET_TASKS_API';
 export const DELETE_TASK = 'DELETE_TASK';
 export const API_FAIL = 'API_FAIL';
 export const DELETED = 'DELETED';
+export const ADDED = 'ADDED';

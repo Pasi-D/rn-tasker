@@ -9,12 +9,15 @@ import { connect } from "react-redux";
 
 import Modal from "react-native-modal";
 
-import { deleteTask, falsifyDelStatus } from '../actions/taskActions';
+import { StackActions, NavigationActions } from "react-navigation";
+
+import { deleteTask, falsifyDelStatus, falsifyAddStatus } from '../actions/taskActions';
 
 class ShowTaskScreen extends Component{
 
     componentDidMount(){
         this.props.falsifyDelStatus();
+        this.props.falsifyAddStatus();
     }
 
     state = {
@@ -43,10 +46,14 @@ class ShowTaskScreen extends Component{
         this.props.deleteTask(id);        
         this._toggleDeleteModal();
         
-        // replace the current screen with the given route
-        this.props.navigation.replace({
-            routeName: 'Home'            
-        })
+        const resetAction = StackActions.reset({
+            index: 0,
+            key: null,
+            actions: [                
+                NavigationActions.navigate({ routeName: 'Home' }),
+            ],
+          });        
+        this.props.navigation.dispatch(resetAction);  
     }
 
     _cancelDeleteButton = () => {
@@ -124,11 +131,13 @@ class ShowTaskScreen extends Component{
 
 ShowTaskScreen.propTypes = {
     //deleteTask: PropTypes.func.isRequired,  
-    tasks: PropTypes.object.isRequired  
+    tasks: PropTypes.object.isRequired,
+    falsifyAddStatus: PropTypes.func.isRequired,
+    falsifyDelStatus: PropTypes.func.isRequired
 }
 
 const mapStateToProps = (state) => ({
     tasks: state.tasks    
 })
 
-export default connect(mapStateToProps, { deleteTask, falsifyDelStatus })(ShowTaskScreen);
+export default connect(mapStateToProps, { deleteTask, falsifyDelStatus, falsifyAddStatus })(ShowTaskScreen);

@@ -6,9 +6,15 @@ import { Header } from 'react-native-elements'
 
 import moment from "moment";
 
+import { connect } from "react-redux";
+
 import t from 'tcomb-form-native'; //0.6.17
 
+import { StackActions, NavigationActions } from "react-navigation";
+
 import axios from "axios";
+
+import { addTask, falsifyAddStatus, falsifyDelStatus } from '../actions/taskActions';
 
 const Form = t.form.Form;
 
@@ -40,7 +46,12 @@ const options = {
 
 var ip = require('../../dev/configs/keys').machineIP;
 
-export default class AddTaskScreen extends Component{
+class AddTaskScreen extends Component{
+
+    componentDidMount(){
+        this.props.falsifyAddStatus();
+        this.props.falsifyDelStatus();
+    }
 
     constructor(props){
         super(props);
@@ -54,12 +65,22 @@ export default class AddTaskScreen extends Component{
         const { title, description, start_date, end_date } = this.state.task
 
         // make an axios call --> switch this to saga later
-        axios.post(ip + ':3000/api/task/', { title, description, start_date, end_date })
+        /* axios.post(ip + ':3000/api/task/', { title, description, start_date, end_date })
                 .then(result => {
                     this.props.navigation.replace({
                         routeName: 'Home'            
                     })
-                })
+                }) */
+        this.props.addTask({ title, description, start_date, end_date })
+                
+        const resetAction = StackActions.reset({
+            index: 0,
+            key: null,
+            actions: [                
+                NavigationActions.navigate({ routeName: 'Home' }),
+            ],
+          });        
+        this.props.navigation.dispatch(resetAction);  
     }
 
     onChange = (value) => {
@@ -102,3 +123,9 @@ const styles = StyleSheet.create({
       backgroundColor: '#ffffff',
     },
 });
+
+const mapStateToProps = (state) => ({
+    tasks: state.tasks
+})
+
+export default connect(mapStateToProps, { addTask, falsifyAddStatus, falsifyDelStatus })(AddTaskScreen);
