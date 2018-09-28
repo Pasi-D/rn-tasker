@@ -3,7 +3,9 @@ import {
     GET_TASK,
     API_FAIL,
     DELETED,
-    ADDED
+    ADDED,
+    FLUSH,
+    SET_STATE
 } from '../actions/types'
 
 const initialState = {
@@ -13,6 +15,17 @@ const initialState = {
     loading: true,
     deleted: false,
     added: false
+}
+
+function setState(state, newState){
+    return {
+        ...state,
+        ...newState
+    }
+}
+
+function flushState(){
+    return {};
 }
 
 export default function(state=initialState, action){
@@ -52,6 +65,12 @@ export default function(state=initialState, action){
                 loading: false,
                 added: action.addStatus
             }
+        // Clears all states            
+        case FLUSH:
+            return flushState() 
+        // Sets to a new State            
+        case SET_STATE:
+            return setState(state, action.state)
         default:
             return state;
     }

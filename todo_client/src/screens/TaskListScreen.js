@@ -35,8 +35,6 @@ class TaskListScreen extends Component{
         const tasks = resTasks.tasks;
         const loading = this.props.loading;
 
-        console.log('tasks : ' + JSON.stringify(tasks));
-
         //convert the restasks in JSON.stringify to an array
         if(this.props.errors){
             return(
@@ -61,7 +59,8 @@ class TaskListScreen extends Component{
                 <View>
                     <Header                        
                         centerComponent={{ text: 'Tasks Lists', style: { color: '#fff' } }}
-                        rightComponent={{ icon: 'add', 
+                        rightComponent={{ icon: 'add',
+                                          name: 'addBtn', 
                                           color: '#fff',
                                           onPress: () => this._addTaskIconPress()  
                                         }}                        
@@ -90,12 +89,10 @@ class TaskListScreen extends Component{
 
     componentDidMount(){
         this.props.getTasks();                       
-        if (this.props.deleted) {
-            console.log('This is supposed to trigger on deletion');
+        if (this.props.deleted) {            
             
             ToastAndroid.show('Task Was Deleted', ToastAndroid.LONG);
-        }else if(this.props.added){
-            console.log('This is supposed to trigger on addition');
+        }else if(this.props.added){        
 
             ToastAndroid('Task was added', ToastAndroid.LONG);
         }

@@ -1,0 +1,53 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`>>> Show Task Screen  +++ Should Mount Show Task Screen 1`] = `
+<ShowTaskScreen
+  deleteTask={[Function]}
+  falsifyAddStatus={[Function]}
+  falsifyDelStatus={[Function]}
+  navigation={
+    Object {
+      "getParam": [Function],
+    }
+  }
+  store={
+    Object {
+      "dispatch": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+      Symbol(observable): [Function],
+    }
+  }
+  storeSubscription={
+    Subscription {
+      "listeners": Object {
+        "clear": [Function],
+        "get": [Function],
+        "notify": [Function],
+        "subscribe": [Function],
+      },
+      "onStateChange": [Function],
+      "parentSub": undefined,
+      "store": Object {
+        "dispatch": [Function],
+        "getState": [Function],
+        "replaceReducer": [Function],
+        "subscribe": [Function],
+        Symbol(observable): [Function],
+      },
+      "unsubscribe": [Function],
+    }
+  }
+  tasks={
+    Object {
+      "added": false,
+      "deleted": false,
+      "errors": null,
+      "loading": true,
+      "task": null,
+      "tasks": null,
+    }
+  }
+/>
+`;

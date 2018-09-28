@@ -16,22 +16,19 @@ import {
 
 // watcher saga: watches for actions dispatched to the store, starts worker saga
 function* getWatcherSaga(){
-    //takeLatest automatically cancels any previous saga task started previous if it's still running.    
-    console.log('Saga listening to dispatch calls');
+    //takeLatest automatically cancels any previous saga task started previous if it's still running.        
     
     yield takeLatest(GET_TASKS_API, workerFetchTasks)
 }
 
 // deleteWatcher Saga listens 
-function* deleteWatcherSaga(){
-    console.log('Saga listening to dispatch calls of delete type');
+function* deleteWatcherSaga(){    
 
     yield takeLatest(DELETE_TASK, workerDeleteTask)
 }
 
 function* addWatcherSaga(){
-    console.log('Saga listening to dispatch calls of add type');
-    
+        
     yield takeLatest(ADD_TASK, workerAddTask) 
 }
 
@@ -85,9 +82,7 @@ export function* workerAddTask(action){
     try {
         const response = yield call(fetchAddTask, action.task);
 
-        if (response) {
-            console.log('response ' + response);
-            
+        if (response) {        
             var addStatus = true
         }else{
             var addStatus = false
