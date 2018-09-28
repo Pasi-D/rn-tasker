@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`>>> Task List Screen  +++ Should mount TaskList 1`] = `
+<ForwardRef(View)
+  style={
+    Object {
+      "flex": 1,
+      "padding": 40,
+    }
+  }
+>
+  <ForwardRef(ActivityIndicator)
+    animating={true}
+    color="#999999"
+    hidesWhenStopped={true}
+    size="large"
+  />
+</ForwardRef(View)>
+`;

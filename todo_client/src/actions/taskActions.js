@@ -1,5 +1,3 @@
-import axios from 'axios';
-
 import {
     GET_TASK,    
     GET_TASKS_API,

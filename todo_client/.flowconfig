@@ -16,6 +16,9 @@
 ; Ignore polyfills
 .*/Libraries/polyfills/.*
 
+; Ignore config-chain test
+.*/node_modules/npm/node_modules/config-chain/test/broken.json
+
 ; Ignore metro
 .*/node_modules/metro/.*
 

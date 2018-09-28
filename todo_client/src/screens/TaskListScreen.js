@@ -73,6 +73,9 @@ class TaskListScreen extends Component{
                                     onPress={() => this._listItemPress(item)}
                                     key={item._id}
                                     title={item.title}
+                                    subtitle={
+                                                (item.status) ? 'Completed' : 'Incomplete'
+                                             }
                                     />
                             ))
                         }

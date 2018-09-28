@@ -38,7 +38,10 @@ const RootStack = createStackNavigator(
     initialRouteName: 'Home',
   }
 )
-export default class App extends Component{
+
+type Props = {};
+
+export default class App extends Component<Props>{
   render() {
     return (
       <Provider store={store}>

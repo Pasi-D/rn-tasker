@@ -2,7 +2,7 @@ import { createStore, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
 
 //rootReducer
-import rootReducers from './reducers';
+import rootReducers from './reducers/index';
 
 //rootSaga
 import rootSaga from './sagas/sagas'

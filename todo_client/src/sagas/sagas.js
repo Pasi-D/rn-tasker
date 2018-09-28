@@ -44,7 +44,6 @@ export const fetchTasks = () => axios.get(ip + ':3000/api/task')
 // exporting for testing
 export function* workerFetchTasks(){
     try {
-
         const response = yield call(fetchTasks);
         const payload = response.data;            
 
