@@ -1,8 +1,7 @@
 import taskReducer from '../../reducers/taskReducer';
 
 import { 
-    GET_TASKS,
-    GET_TASK,
+    GET_TASKS,    
     API_FAIL,
     DELETED,
     ADDED,
