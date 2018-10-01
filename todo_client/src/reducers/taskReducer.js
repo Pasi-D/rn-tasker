@@ -67,7 +67,7 @@ export default function(state=initialState, action){
             }
         // Clears all states            
         case FLUSH:
-            return flushState() 
+            return flushState(); 
         // Sets to a new State            
         case SET_STATE:
             return setState(state, action.state)
