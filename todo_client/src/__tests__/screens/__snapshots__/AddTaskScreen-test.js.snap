@@ -1,76 +1,48 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`>>> Task List Screen  +++ Should mount TaskList with dummy API data 1`] = `
-<ForwardRef(View)>
-  <Header
-    centerComponent={
-      Object {
-        "style": Object {
-          "color": "#fff",
-        },
-        "text": "Tasks Lists",
-      }
+exports[`>>> Add Task Scren +++ Should mount correctly 1`] = `
+<AddTaskScreen
+  addTask={[Function]}
+  falsifyAddStatus={[Function]}
+  falsifyDelStatus={[Function]}
+  store={
+    Object {
+      "dispatch": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+      Symbol(observable): [Function],
     }
-    rightComponent={
-      Object {
-        "color": "#fff",
-        "icon": "add",
-        "name": "addBtn",
-        "onPress": [Function],
-      }
+  }
+  storeSubscription={
+    Subscription {
+      "listeners": Object {
+        "clear": [Function],
+        "get": [Function],
+        "notify": [Function],
+        "subscribe": [Function],
+      },
+      "onStateChange": [Function],
+      "parentSub": undefined,
+      "store": Object {
+        "dispatch": [Function],
+        "getState": [Function],
+        "replaceReducer": [Function],
+        "subscribe": [Function],
+        Symbol(observable): [Function],
+      },
+      "unsubscribe": [Function],
     }
-  />
-  <List
-    style={
-      Object {
-        "marginTop": 20,
-      }
+  }
+  tasks={
+    Object {
+      "added": false,
+      "deleted": false,
+      "errors": null,
+      "loading": true,
+      "task": null,
+      "tasks": null,
     }
-  >
-    <ListItem
-      chevronColor="#bdc6cf"
-      disabled={false}
-      hideChevron={false}
-      key="5ba9d4e21a5bcb2c5e6eaf3e"
-      leftIconUnderlayColor="white"
-      onPress={[Function]}
-      rightIcon={
-        Object {
-          "name": "chevron-right",
-        }
-      }
-      rightTitleNumberOfLines={1}
-      roundAvatar={false}
-      subtitle="Completed"
-      subtitleNumberOfLines={1}
-      switchButton={false}
-      textInputEditable={true}
-      title="Task Two"
-      titleNumberOfLines={1}
-      underlayColor="white"
-    />
-    <ListItem
-      chevronColor="#bdc6cf"
-      disabled={false}
-      hideChevron={false}
-      key="5ba9d5711a5bcb2c5e6eaf3f"
-      leftIconUnderlayColor="white"
-      onPress={[Function]}
-      rightIcon={
-        Object {
-          "name": "chevron-right",
-        }
-      }
-      rightTitleNumberOfLines={1}
-      roundAvatar={false}
-      subtitle="Incomplete"
-      subtitleNumberOfLines={1}
-      switchButton={false}
-      textInputEditable={true}
-      title="Task Three"
-      titleNumberOfLines={1}
-      underlayColor="white"
-    />
-  </List>
-</ForwardRef(View)>
+  }
+/>
 `;

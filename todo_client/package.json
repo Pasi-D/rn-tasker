@@ -51,6 +51,9 @@
     },
     "snapshotSerializers": [
       "enzyme-to-json/serializer"
+    ],
+    "transformIgnorePatterns": [
+      "node_modules/(?!react-native|tcomb-form-native)"
     ]
   }
 }

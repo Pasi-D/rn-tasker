@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`>>> Show Task Screen  +++ Should Mount Show Task Screen 1`] = `
+exports[`>>> Show Task Screen  +++ Should Mount Show Task Screen with props data 1`] = `
 <ShowTaskScreen
   deleteTask={[Function]}
   falsifyAddStatus={[Function]}

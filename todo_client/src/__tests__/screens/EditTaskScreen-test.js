@@ -1,4 +1,4 @@
-// Use Enzyme along with Jest to Test snapshots 
+// Use Enzyme  along with jest 
 
 import "react-native"
 import React from "react";
@@ -6,10 +6,10 @@ import { shallow } from "enzyme";
 
 import store from '../../store';
 
-import ShowTaskScreen from '../../screens/ShowTaskScreen';
+import EditTaskScreen from '../../screens/EditTaskScreen';
 
-describe('>>> Show Task Screen ', () => {
-    it('+++ Should Mount Show Task Screen with props data', () => {
+describe('>>> Edit Task Screen', () => {
+    it('+++ Should Mount the Edit Task Screen with props data', () => {
         const props = {
             navigation: {
                 getParam() {
@@ -28,9 +28,9 @@ describe('>>> Show Task Screen ', () => {
             },
             store: store
         }
-        
-        const wrapper = shallow(<ShowTaskScreen {...props} />)
-        expect(wrapper).toMatchSnapshot()
 
+        const wrapper = shallow(<EditTaskScreen {...props} />)
+        expect(wrapper).toMatchSnapshot()
     })
 })
+
