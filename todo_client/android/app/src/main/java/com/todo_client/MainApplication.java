@@ -2,6 +2,8 @@ package com.todo_client;
 
 import android.app.Application;
 
+import com.todo_clientclite.CouchPackage;
+
 import com.facebook.react.ReactApplication;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
@@ -21,8 +23,10 @@ public class MainApplication extends Application implements ReactApplication {
 
     @Override
     protected List<ReactPackage> getPackages() {
+      // Add additional packages you require here
       return Arrays.<ReactPackage>asList(
-          new MainReactPackage()
+          new CouchPackage(),
+          new MainReactPackage()          
       );
     }
 
@@ -30,6 +34,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected String getJSMainModuleName() {
       return "index";
     }
+
   };
 
   @Override
