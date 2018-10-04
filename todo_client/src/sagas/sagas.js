@@ -10,6 +10,8 @@ import {
 
  import axios from 'axios';
 
+ import { NativeModules } from 'react-native'
+
  import { call, put, takeLatest, all } from 'redux-saga/effects';
 
  var ip = require('../../dev/configs/keys').machineIP;
@@ -87,6 +89,9 @@ export function* workerAddTask(action){
         }else{
             var addStatus = false
         }
+
+        // Create a dummy task using the Native Modules      
+        const couchdoc = yield NativeModules.CouchModule.createDocument("testdoc");  
 
         yield put({ type: ADDED, addStatus })
     } catch (err) {

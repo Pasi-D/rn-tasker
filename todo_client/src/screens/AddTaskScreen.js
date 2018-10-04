@@ -12,8 +12,6 @@ import t from 'tcomb-form-native'; //0.6.17
 
 import { StackActions, NavigationActions } from "react-navigation";
 
-import axios from "axios";
-
 import { addTask, falsifyAddStatus, falsifyDelStatus } from '../actions/taskActions';
 
 const Form = t.form.Form;
@@ -73,6 +71,8 @@ class AddTaskScreen extends Component{
                 }) */
         this.props.addTask({ title, description, start_date, end_date })
                 
+        // TODO : Create a document in couchdb lite and store the task within Saga    
+
         const resetAction = StackActions.reset({
             index: 0,
             key: null,

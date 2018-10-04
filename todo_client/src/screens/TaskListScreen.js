@@ -1,5 +1,5 @@
 import React,{ Component } from "react";
-import { ActivityIndicator, View, Text, ToastAndroid } from "react-native";
+import { ActivityIndicator, View, Text, ToastAndroid, NativeModules} from "react-native";
 
 import { List, ListItem, Header } from 'react-native-elements';
 
@@ -14,6 +14,7 @@ class TaskListScreen extends Component{
     constructor(props) {
         super(props);   
         this._listItemPress = this._listItemPress.bind(this) 
+        NativeModules.CouchModule.createDatabase("test");
     }
 
     _keyExtractor = (item, index) => item._id;
